@@ -16,11 +16,12 @@ function addItem(e) {
     e.preventDefault();
 
     if (submit.value != "Submit") {
-        editItem.target.parentNode.childNodes[0].data = document.getElementById("item").value;
-
+        let itemName = editItem.target.parentNode.childNodes[0].data;
+        let newItemName = document.getElementById("item").value;
+        editItem.target.parentNode.childNodes[0].data = newItemName;
         submit.value = "Submit";
         document.getElementById("item").value = "";
-        document.getElementById("lblsuccess").innerHTML = "Item edited successfully";
+        document.getElementById("lblsuccess").innerHTML = `${itemName} successfully changed to ${newItemName}`;
         document.getElementById("lblsuccess").style.display = "block";
         setTimeout(function () {
             document.getElementById("lblsuccess").style.display = "none";
@@ -57,10 +58,11 @@ function addItem(e) {
 function removeItem(e) {
     e.preventDefault();
     if (e.target.classList.contains("delete")) {
-        if (confirm("Are you Sure?")) {
+        let itemName = e.target.parentNode.childNodes[0].data;
+        if (confirm(`Delete ${itemName} from list?`)) {
             let li = e.target.parentNode;
             items.removeChild(li);
-            document.getElementById("lblsuccess").innerHTML = "Item deleted successfully";
+            document.getElementById("lblsuccess").innerHTML = `${itemName} deleted successfully`;
             document.getElementById("lblsuccess").style.display = "block";
             setTimeout(function () {
                 document.getElementById("lblsuccess").style.display = "none";

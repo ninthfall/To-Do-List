@@ -1,15 +1,30 @@
-﻿/*---------------Header-----------------*/
+﻿@import url('https://fonts.googleapis.com/css2?family=Caveat:wght@400;700&display=swap');
+
+/*---------------Header-----------------*/
 header {
     text-align: center;
     padding: 30px;
 }
 
 /*---------------Main-----------------*/
+h1, h2, li {
+    font-family: 'Caveat', cursive;
+}
+
 h2 {
     padding: 10px 0px 10px 0px;
     text-align: center;
 }
 
+li {
+    font-size: 1.5em;
+}
+
+p {
+    font-family: serif;
+}
+
 #submit-box {
     padding: 0px;
+    font-family: serif;
 }
