@@ -4,11 +4,13 @@ window.onload = () => {
 
     let items = document.getElementById("items");
     let submit = document.getElementById("submit");
+    let clear = document.getElementById("clear-list");
 
     let editItem = null;
 
     form1.addEventListener("submit", addItem);
     items.addEventListener("click", removeItem);
+    clear.addEventListener("click", clearList);
 };
 
 //adding item to list
@@ -79,4 +81,20 @@ function removeItem(e) {
 //toggle submit button 
 function toggleButton(ref, btnID) {
     document.getElementById(btnID).disabled = false;
+}
+
+//clear entire list
+function clearList(e) {
+    e.preventDefault();
+    if (confirm("Delete all items from list?")) {
+        let list = document.getElementById("items");
+        while (list.firstChild) {
+            list.removeChild(list.firstChild);
+        }
+        document.getElementById("lblsuccess").innerHTML = "All items deleted from list";
+        document.getElementById("lblsuccess").style.display = "block";
+        setTimeout(function () {
+            document.getElementById("lblsuccess").style.display = "none";
+        }, 3000);
+    }    
 }

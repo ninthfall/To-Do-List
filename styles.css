@@ -28,3 +28,7 @@ p {
     padding: 0px;
     font-family: serif;
 }
+
+#clear-list {
+    margin: 15px;
+}
