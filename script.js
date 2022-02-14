@@ -18,9 +18,9 @@ function addItem(e) {
     e.preventDefault();
 
     if (submit.value != "Submit") {
-        let itemName = editItem.target.parentNode.childNodes[0].data;
+        let itemName = editItem.target.parentNode.childNodes[0].childNodes[0].data;
         let newItemName = document.getElementById("item").value;
-        editItem.target.parentNode.childNodes[0].data = newItemName;
+        editItem.target.parentNode.childNodes[0].childNodes[0].data = newItemName;
         submit.value = "Submit";
         document.getElementById("item").value = "";
         document.getElementById("lblsuccess").innerHTML = `${itemName} successfully changed to ${newItemName}`;
@@ -46,12 +46,22 @@ function addItem(e) {
     deletButton.appendChild(document.createTextNode("Delete"));
 
     let editButton = document.createElement("button");
-    editButton.className = "btn-success btn btn-sm float-right edit";
+    editButton.className = "btn-primary btn btn-sm float-right edit";
     editButton.appendChild(document.createTextNode("Edit"));
 
-    li.appendChild(document.createTextNode(newItem));
-    li.appendChild(deletButton);
+    let checkButton = document.createElement("button");
+    checkButton.className = "btn-success btn btn-sm float-right check";
+    checkButton.appendChild(document.createTextNode("Check"));
+
+    let listItem = document.createElement("span");
+    listItem.style.textDecoration = "none"
+    listItem.appendChild(document.createTextNode(newItem));
+    
+
+    li.appendChild(listItem);
     li.appendChild(editButton);
+    li.appendChild(deletButton);
+    li.appendChild(checkButton);
 
     items.appendChild(li);
 }
@@ -60,7 +70,7 @@ function addItem(e) {
 function removeItem(e) {
     e.preventDefault();
     if (e.target.classList.contains("delete")) {
-        let itemName = e.target.parentNode.childNodes[0].data;
+        let itemName = e.target.parentNode.childNodes[0].childNodes[0].data;
         if (confirm(`Delete ${itemName} from list?`)) {
             let li = e.target.parentNode;
             items.removeChild(li);
@@ -72,9 +82,18 @@ function removeItem(e) {
         }
     }
     if (e.target.classList.contains("edit")) {
-        document.getElementById("item").value = e.target.parentNode.childNodes[0].data;
+        document.getElementById("item").value = e.target.parentNode.childNodes[0].childNodes[0].data;
         submit.value = "EDIT";
         editItem = e;
+    }
+
+    if (e.target.classList.contains("check")) {
+        let item = e.target.parentNode.childNodes[0];
+        if (item.style.textDecoration == "none") {
+            item.style.textDecoration = "line-through"
+        } else {
+            item.style.textDecoration = "none"
+        }
     }
 }
 
@@ -98,3 +117,4 @@ function clearList(e) {
         }, 3000);
     }    
 }
+
